@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.example.shopproduct")
 @EnableDiscoveryClient
 @EntityScan("com.example.model")
 public class ShopOrderApplication {

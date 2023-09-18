@@ -3,6 +3,7 @@ package com.example.shoporder.controller;
 import com.example.model.Order;
 import com.example.model.Product;
 import com.example.shoporder.service.OrderService;
+import com.example.shopproduct.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -23,6 +24,8 @@ public class OrderController {
 
     @Autowired
     private RestTemplate restTemplate;
+    @Autowired
+    private ProductService productService;
     @Autowired
     private OrderService orderService;
     @Autowired
@@ -47,12 +50,16 @@ public class OrderController {
 //        log.info(">>商品信息，查询结果:" + JSON.toJSONString(product));
 
         // 2、通过ribbon实现负载均衡调用商品微服务
-        //直接使用微服务名字， 从nacos中获取服务地址
-        String url = "service-product";
-        // 通过restTemplate调用商品微服务
-        Product product = restTemplate.getForObject(
-                "http://" + url + "/product/" + pid, Product.class);
-        log.info(">>商品信息，查询结果:" + JSON.toJSONString(product));
+//        //直接使用微服务名字， 从nacos中获取服务地址
+//        String url = "service-product";
+//        // 通过restTemplate调用商品微服务
+//        Product product = restTemplate.getForObject(
+//                "http://" + url + "/product/" + pid, Product.class);
+//        log.info(">>商品信息，查询结果:" + JSON.toJSONString(product));
+
+        // 3、通过feign实现负载均衡调用商品微服务
+        Product product = productService.findByPid(pid);
+        log.info(">>商品信息,查询结果:" + JSON.toJSONString(product));
 
         Order order = new Order();
         order.setUid(1);
