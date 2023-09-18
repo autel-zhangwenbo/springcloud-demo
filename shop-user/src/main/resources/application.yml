@@ -1,0 +1,21 @@
+server:
+  port: 8071
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.250.68.222:8848
+  application:
+    name: service-user
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://10.250.68.222:3306/shop?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: ecommerce
+    password: a2460c22-a657-4f03-8cca-9756ebe225db
+  jpa:
+    hibernate:
+      ddl-auto:
+        auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
