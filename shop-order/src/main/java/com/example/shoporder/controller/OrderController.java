@@ -10,6 +10,7 @@ import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -70,5 +71,14 @@ public class OrderController {
         order.setNumber(1);
         orderService.save(order);
         return order;
+    }
+
+    @RequestMapping("/order/message1")
+    public String message1() {
+        return "message1";
+    }
+    @RequestMapping("/order/message2")
+    public String message2() {
+        return "message2";
     }
 }
